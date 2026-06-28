@@ -49,16 +49,21 @@ class XCommentAccessibilityService : AccessibilityService() {
         val pkg = event?.packageName?.toString().orEmpty()
         if (pkg.isBlank()) return
 
-        // Only react to window-level changes (app switches), not every UI event
-        val isWindowChange = event?.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
+        val eventType = event?.eventType ?: return
 
-        if (isXApp(pkg)) {
-            isInXApp = true
-            showBubble()
-        } else if (isWindowChange && !isSystemOrOverlayPackage(pkg)) {
-            // User switched to a real (non-X) app
-            isInXApp = false
-            hideBubbleAndPanel()
+        when {
+            // Twitter/X package → always show bubble
+            isXApp(pkg) -> {
+                isInXApp = true
+                showBubble()
+            }
+            // System/overlay packages → ignore completely, don't touch bubble state
+            isSystemOrOverlayPackage(pkg) -> return
+            // Real app opened in foreground → hide everything
+            eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED -> {
+                isInXApp = false
+                hideBubbleAndPanel()
+            }
         }
     }
 
@@ -82,6 +87,8 @@ class XCommentAccessibilityService : AccessibilityService() {
             "com.touchtype.swiftkey",
             "com.nuance",
             "com.google.android.gboard",
+            "com.iflytek",
+            "com.baidu.input",
         )
         return systemPrefixes.any { pkg.startsWith(it) }
     }
@@ -96,7 +103,10 @@ class XCommentAccessibilityService : AccessibilityService() {
 
     /** Returns true if [pkg] is X/Twitter. */
     private fun isXApp(pkg: String): Boolean =
-        pkg == "com.twitter.android" || pkg == "com.x.android"
+        pkg == "com.twitter.android" ||
+        pkg == "com.x.android" ||
+        pkg.startsWith("com.twitter") ||
+        pkg.startsWith("com.x.android")
 
     // ————————————————————————————————————————————————————————————————————————————————————————————
     // Bubble
@@ -261,7 +271,7 @@ class XCommentAccessibilityService : AccessibilityService() {
         bottomRow.addView(regenBtn, LinearLayout.LayoutParams(0, -2).apply { weight = 1f })
         container.addView(bottomRow)
 
-        val params = overlayParams(dp(340), WindowManager.LayoutParams.WRAP_CONTENT).apply {
+        val params = overlayParams(dp(340), WindowManager.LayoutParams.WRAP_CONTENT, focusable = true).apply {
             gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
             y = dp(100)
         }
@@ -396,10 +406,14 @@ class XCommentAccessibilityService : AccessibilityService() {
     // Overlay helpers
     // ————————————————————————————————————————————————————————————————————————————————————————————
 
-    private fun overlayParams(w: Int, h: Int) = WindowManager.LayoutParams(
+    private fun overlayParams(w: Int, h: Int, focusable: Boolean = false) = WindowManager.LayoutParams(
         w, h,
         WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+        if (focusable) {
+            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+        } else {
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+        },
         PixelFormat.TRANSLUCENT,
     )
 
