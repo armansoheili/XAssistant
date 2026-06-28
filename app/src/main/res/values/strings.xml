@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">XComment AI</string>
+    <string name="accessibility_service_label">XComment AI Assistant</string>
+    <string name="accessibility_service_description">Shows a floating AI reply button on X (Twitter) and helps you insert generated replies into the focused reply box.</string>
+
+    <!-- Home -->
+    <string name="app_tagline">Smart reply ideas for X, right where you type.</string>
+    <string name="setup_title">Setup</string>
+    <string name="setup_complete">You\'re all set</string>
+    <string name="setup_progress">%1$d of %2$d steps done</string>
+
+    <!-- Permissions -->
+    <string name="perm_overlay_title">Floating button</string>
+    <string name="perm_overlay_desc">Allow XComment to draw the AI bubble over other apps.</string>
+    <string name="perm_accessibility_title">Accessibility service</string>
+    <string name="perm_accessibility_desc">Lets XComment read the visible post and insert your reply.</string>
+    <string name="perm_apikey_title">API key</string>
+    <string name="perm_apikey_desc">Connect your AI provider to generate replies.</string>
+    <string name="status_granted">Enabled</string>
+    <string name="status_missing">Not set up</string>
+    <string name="action_grant">Grant</string>
+    <string name="action_enable">Enable</string>
+    <string name="action_open">Open</string>
+
+    <!-- Settings -->
+    <string name="settings_title">AI settings</string>
+    <string name="label_api_key">API key</string>
+    <string name="hint_api_key">sk-… or fe-…</string>
+    <string name="label_api_url">API URL</string>
+    <string name="label_model">Model</string>
+    <string name="label_tone">Default tone</string>
+    <string name="label_language">Reply language</string>
+    <string name="label_count">Suggestions per request</string>
+    <string name="action_save">Save settings</string>
+    <string name="saved">Settings saved</string>
+    <string name="show">Show</string>
+    <string name="hide">Hide</string>
+
+    <!-- Tones -->
+    <string name="tone_friendly">Friendly</string>
+    <string name="tone_professional">Professional</string>
+    <string name="tone_witty">Witty</string>
+    <string name="tone_supportive">Supportive</string>
+    <string name="tone_contrarian">Contrarian</string>
+
+    <!-- Languages -->
+    <string name="lang_auto">Match the post</string>
+    <string name="lang_english">English</string>
+    <string name="lang_persian">Persian</string>
+
+    <!-- How to use -->
+    <string name="howto_title">How to use</string>
+    <string name="howto_1">Open X and a post you want to reply to.</string>
+    <string name="howto_2">Tap the floating AI bubble.</string>
+    <string name="howto_3">Pick a tone, then tap a suggestion to insert it.</string>
+    <string name="howto_4">Review it and press Reply yourself — XComment never posts for you.</string>
+
+    <string name="safety_note">For your safety, XComment only inserts text. You always press Post manually.</string>
+
+    <!-- Overlay -->
+    <string name="overlay_title">Reply ideas</string>
+    <string name="overlay_no_text">No post detected. Open a post, then tap AI again.</string>
+    <string name="overlay_loading">Thinking…</string>
+    <string name="overlay_instant">Quick ideas — AI is refining…</string>
+    <string name="overlay_ready">Tap a reply to insert it.</string>
+    <string name="overlay_close">Close</string>
+    <string name="overlay_regenerate">Regenerate</string>
+    <string name="overlay_inserted">Inserted into reply box</string>
+    <string name="overlay_copied">No reply box focused — copied to clipboard.</string>
+</resources>

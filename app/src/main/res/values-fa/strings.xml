@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ایکس‌کامنت</string>
+    <string name="accessibility_service_label">دستیار ایکس‌کامنت</string>
+    <string name="accessibility_service_description">یک دکمه شناور هوش مصنوعی روی ایکس (توییتر) نشان می‌دهد و پاسخ ساخته‌شده را در کادر پاسخ وارد می‌کند.</string>
+
+    <!-- Home -->
+    <string name="app_tagline">ایده‌های هوشمند پاسخ برای ایکس، دقیقاً همان‌جا که می‌نویسی.</string>
+    <string name="setup_title">راه‌اندازی</string>
+    <string name="setup_complete">همه‌چیز آماده است</string>
+    <string name="setup_progress">%1$d از %2$d مرحله انجام شد</string>
+
+    <!-- Permissions -->
+    <string name="perm_overlay_title">دکمه شناور</string>
+    <string name="perm_overlay_desc">اجازه بده ایکس‌کامنت حباب هوش مصنوعی را روی برنامه‌های دیگر نشان دهد.</string>
+    <string name="perm_accessibility_title">سرویس دسترس‌پذیری</string>
+    <string name="perm_accessibility_desc">به ایکس‌کامنت اجازه می‌دهد متن پست را بخواند و پاسخ را وارد کند.</string>
+    <string name="perm_apikey_title">کلید API</string>
+    <string name="perm_apikey_desc">سرویس هوش مصنوعی را برای ساخت پاسخ‌ها وصل کن.</string>
+    <string name="status_granted">فعال</string>
+    <string name="status_missing">تنظیم نشده</string>
+    <string name="action_grant">اجازه</string>
+    <string name="action_enable">فعال‌سازی</string>
+    <string name="action_open">باز کن</string>
+
+    <!-- Settings -->
+    <string name="settings_title">تنظیمات هوش مصنوعی</string>
+    <string name="label_api_key">کلید API</string>
+    <string name="hint_api_key">sk-… یا fe-…</string>
+    <string name="label_api_url">آدرس API</string>
+    <string name="label_model">مدل</string>
+    <string name="label_tone">لحن پیش‌فرض</string>
+    <string name="label_language">زبان پاسخ</string>
+    <string name="label_count">تعداد پیشنهاد در هر درخواست</string>
+    <string name="action_save">ذخیره تنظیمات</string>
+    <string name="saved">تنظیمات ذخیره شد</string>
+    <string name="show">نمایش</string>
+    <string name="hide">پنهان</string>
+
+    <!-- Tones -->
+    <string name="tone_friendly">صمیمی</string>
+    <string name="tone_professional">رسمی</string>
+    <string name="tone_witty">بامزه</string>
+    <string name="tone_supportive">حمایتگر</string>
+    <string name="tone_contrarian">مخالف</string>
+
+    <!-- Languages -->
+    <string name="lang_auto">هم‌زبان پست</string>
+    <string name="lang_english">انگلیسی</string>
+    <string name="lang_persian">فارسی</string>
+
+    <!-- How to use -->
+    <string name="howto_title">روش استفاده</string>
+    <string name="howto_1">ایکس و پستی که می‌خواهی به آن پاسخ دهی را باز کن.</string>
+    <string name="howto_2">روی حباب شناور هوش مصنوعی بزن.</string>
+    <string name="howto_3">یک لحن انتخاب کن و روی یک پیشنهاد بزن تا وارد شود.</string>
+    <string name="howto_4">آن را بازبینی کن و خودت دکمه پاسخ را بزن — ایکس‌کامنت هرگز به‌جای تو ارسال نمی‌کند.</string>
+
+    <string name="safety_note">برای امنیت تو، ایکس‌کامنت فقط متن را وارد می‌کند. ارسال نهایی همیشه با خودت است.</string>
+
+    <!-- Overlay -->
+    <string name="overlay_title">ایده‌های پاسخ</string>
+    <string name="overlay_no_text">پستی شناسایی نشد. یک پست باز کن و دوباره روی AI بزن.</string>
+    <string name="overlay_loading">در حال فکر کردن…</string>
+    <string name="overlay_instant">ایده‌های سریع — هوش مصنوعی در حال بهبود…</string>
+    <string name="overlay_ready">روی یک پاسخ بزن تا وارد شود.</string>
+    <string name="overlay_close">بستن</string>
+    <string name="overlay_regenerate">ساخت دوباره</string>
+    <string name="overlay_inserted">در کادر پاسخ وارد شد</string>
+    <string name="overlay_copied">کادر پاسخی فعال نبود — در کلیپ‌بورد کپی شد.</string>
+</resources>
