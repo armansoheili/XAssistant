@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
+import android.provider.Settings as AndroidSettings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -32,10 +32,6 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.xcomment.android.data.*
 import com.xcomment.android.ui.theme.XCommentTheme
 import kotlinx.coroutines.delay
-
-private interface HasLabel {
-    val labelRes: Int
-}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,7 +126,7 @@ private fun MainScreen() {
                 actionLabel = stringResource(R.string.action_grant),
                 onClick = {
                     val intent = Intent(
-                        Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        AndroidSettings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:${context.packageName}"),
                     )
                     context.startActivity(intent)
@@ -143,7 +139,7 @@ private fun MainScreen() {
                 description = stringResource(R.string.perm_accessibility_desc),
                 granted = accessibilityGranted,
                 actionLabel = stringResource(R.string.action_enable),
-                onClick = { context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) },
+                onClick = { context.startActivity(Intent(AndroidSettings.ACTION_ACCESSIBILITY_SETTINGS)) },
             )
 
             PermissionRow(
@@ -279,6 +275,7 @@ private fun PermissionRow(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SettingsPanel(settings: Settings, onSave: (Settings) -> Unit) {
     var apiKey by remember { mutableStateOf(settings.apiKey) }
@@ -384,11 +381,12 @@ private fun SettingsPanel(settings: Settings, onSave: (Settings) -> Unit) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun <T> EnumDropdown(
     label: String,
     value: T,
-    values: List<T>,
+    values: Iterable<T>,
     onSelect: (T) -> Unit,
 ) where T : Enum<T>, T : HasLabel {
     var expanded by remember { mutableStateOf(false) }
