@@ -48,16 +48,42 @@ class XCommentAccessibilityService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         val pkg = event?.packageName?.toString().orEmpty()
         if (pkg.isBlank()) return
-        // Ignore events from our own overlay or system UI
-        if (pkg == packageName || pkg == "android" || pkg == "com.android.systemui") return
-        val inX = isXApp(pkg)
-        if (inX) {
+
+        // Only react to window-level changes (app switches), not every UI event
+        val isWindowChange = event?.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
+
+        if (isXApp(pkg)) {
             isInXApp = true
             showBubble()
-        } else {
+        } else if (isWindowChange && !isSystemOrOverlayPackage(pkg)) {
+            // User switched to a real (non-X) app
             isInXApp = false
             hideBubbleAndPanel()
         }
+    }
+
+    /**
+     * Returns true for packages that should NOT trigger hiding the bubble.
+     * Covers AOSP system UI, MIUI/HyperOS, Samsung One UI, and our own overlay.
+     */
+    private fun isSystemOrOverlayPackage(pkg: String): Boolean {
+        if (pkg == packageName) return true
+        val systemPrefixes = listOf(
+            "android",
+            "com.android",
+            "com.miui",
+            "com.xiaomi",
+            "com.sec.android",
+            "com.samsung",
+            "com.huawei",
+            "com.hihonor",
+            "com.google.android.inputmethod",
+            "com.swiftkey",
+            "com.touchtype.swiftkey",
+            "com.nuance",
+            "com.google.android.gboard",
+        )
+        return systemPrefixes.any { pkg.startsWith(it) }
     }
 
     override fun onInterrupt() {}
