@@ -37,6 +37,7 @@ class XCommentAccessibilityService : AccessibilityService() {
     private var bubble: View? = null
     private var panel: LinearLayout? = null
     private var requestId = 0
+    private var isInXApp = false
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -46,8 +47,17 @@ class XCommentAccessibilityService : AccessibilityService() {
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         val pkg = event?.packageName?.toString().orEmpty()
+        if (pkg.isBlank()) return
+        // Ignore events from our own overlay or system UI
+        if (pkg == packageName || pkg == "android" || pkg == "com.android.systemui") return
         val inX = isXApp(pkg)
-        if (inX) showBubble() else hideBubbleAndPanel()
+        if (inX) {
+            isInXApp = true
+            showBubble()
+        } else {
+            isInXApp = false
+            hideBubbleAndPanel()
+        }
     }
 
     override fun onInterrupt() {}
